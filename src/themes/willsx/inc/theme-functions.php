@@ -11,12 +11,12 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Add custom classes to body
+ * Add custom theme-specific classes to body
  *
  * @param array $classes Existing body classes.
  * @return array Modified body classes.
  */
-function willsx_body_classes($classes) {
+function willsx_custom_body_classes($classes) {
     // Add a class for singular pages
     if (is_singular()) {
         $classes[] = 'singular';
@@ -41,7 +41,7 @@ function willsx_body_classes($classes) {
 
     return $classes;
 }
-add_filter('body_class', 'willsx_body_classes');
+add_filter('body_class', 'willsx_custom_body_classes');
 
 /**
  * Add custom classes to posts
