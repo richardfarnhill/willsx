@@ -1,6 +1,6 @@
 # WillsX Development Changelog
 
-## v0.1.0 - Project Initialization - [Date]
+## v0.1.0 - Project Initialization - [2024-07-10]
 
 ### Added
 - Created initial project documentation 
