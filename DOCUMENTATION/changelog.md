@@ -1,5 +1,18 @@
 # WillsX Development Changelog
 
+## v0.1.1 - Deployment Documentation - [2024-07-10]
+
+### Added
+- Created comprehensive deployment guide for development/staging environments
+- Added detailed instructions for Git-based deployment workflows
+- Included local development environment setup guidelines
+
+### Changed
+- N/A
+
+### Fixed
+- N/A
+
 ## v0.1.0 - Project Initialization - [2024-07-10]
 
 ### Added
