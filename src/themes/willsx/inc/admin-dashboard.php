@@ -81,49 +81,150 @@ add_action('admin_menu', 'willsx_admin_menu');
  * Render dashboard page
  */
 function willsx_dashboard_page() {
-    // Check user capabilities
-    if (!current_user_can('manage_options')) {
-        return;
-    }
-
-    // Get stats
-    $partner_count = count(willsx_get_all_partners());
-    $post_count = wp_count_posts('post')->publish;
-    $page_count = wp_count_posts('page')->publish;
-
     ?>
-    <div class="wrap willsx-admin-wrap">
-        <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-        
-        <div class="welcome-panel">
-            <div class="welcome-panel-content">
-                <h2><?php _e('Welcome to WillsX!', 'willsx'); ?></h2>
-                <p class="about-description"><?php _e('Thank you for using the WillsX theme. Here you can manage all theme-specific settings.', 'willsx'); ?></p>
-                <div class="welcome-panel-column-container">
-                    <div class="welcome-panel-column">
-                        <h3><?php _e('Quick Links', 'willsx'); ?></h3>
-                        <ul>
-                            <li><a href="<?php echo admin_url('edit.php?post_type=partner'); ?>" class="button button-primary"><?php _e('Manage Partners', 'willsx'); ?></a></li>
-                            <li><a href="<?php echo admin_url('admin.php?page=willsx-autolinker'); ?>" class="button"><?php _e('Auto Linker Settings', 'willsx'); ?></a></li>
-                            <li><a href="<?php echo admin_url('admin.php?page=willsx-dark-mode'); ?>" class="button"><?php _e('Dark Mode Settings', 'willsx'); ?></a></li>
-                            <li><a href="<?php echo admin_url('admin.php?page=willsx-settings'); ?>" class="button"><?php _e('Theme Settings', 'willsx'); ?></a></li>
-                        </ul>
+    <div class="wrap willsx-dashboard">
+        <style>
+            .willsx-dashboard {
+                max-width: 1200px;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .willsx-welcome {
+                background: #fff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                margin-bottom: 30px;
+            }
+            .willsx-welcome h1 {
+                color: #1e1e1e;
+                font-size: 32px;
+                margin: 0 0 15px 0;
+            }
+            .willsx-welcome p {
+                color: #666;
+                font-size: 16px;
+                line-height: 1.6;
+                margin: 0;
+            }
+            .willsx-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+            .willsx-card {
+                background: #fff;
+                padding: 25px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .willsx-card h2 {
+                color: #1e1e1e;
+                font-size: 20px;
+                margin: 0 0 20px 0;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #f0f0f0;
+            }
+            .willsx-button {
+                display: inline-block;
+                padding: 10px 20px;
+                background: #2271b1;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 4px;
+                margin: 5px 0;
+                transition: background 0.3s ease;
+            }
+            .willsx-button:hover {
+                background: #135e96;
+                color: #fff;
+            }
+            .willsx-stat {
+                font-size: 24px;
+                font-weight: bold;
+                color: #1e1e1e;
+                margin: 5px 0;
+            }
+            .willsx-stat-label {
+                color: #666;
+                font-size: 14px;
+            }
+            .willsx-docs-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            .willsx-docs-list li {
+                margin-bottom: 10px;
+            }
+            .willsx-docs-list a {
+                color: #2271b1;
+                text-decoration: none;
+                font-size: 14px;
+            }
+            .willsx-docs-list a:hover {
+                color: #135e96;
+                text-decoration: underline;
+            }
+        </style>
+
+        <div class="willsx-welcome">
+            <h1>Welcome to WillsX!</h1>
+            <p>Thank you for using the WillsX theme. Here you can manage all theme-specific settings and access important documentation.</p>
+        </div>
+
+        <div class="willsx-grid">
+            <!-- Quick Links Section -->
+            <div class="willsx-card">
+                <h2>Quick Links</h2>
+                <a href="<?php echo admin_url('admin.php?page=willsx-partners'); ?>" class="willsx-button">Manage Partners</a><br>
+                <a href="<?php echo admin_url('admin.php?page=willsx-auto-linker'); ?>" class="willsx-button">Auto Linker Settings</a><br>
+                <a href="<?php echo admin_url('admin.php?page=willsx-dark-mode'); ?>" class="willsx-button">Dark Mode Settings</a><br>
+                <a href="<?php echo admin_url('admin.php?page=willsx-theme-settings'); ?>" class="willsx-button">Theme Settings</a>
+            </div>
+
+            <!-- Quick Stats Section -->
+            <div class="willsx-card">
+                <h2>Quick Stats</h2>
+                <?php
+                $partner_count = wp_count_posts('partner')->publish;
+                $post_count = wp_count_posts('post')->publish;
+                $page_count = wp_count_posts('page')->publish;
+                ?>
+                <div class="willsx-stat"><?php echo $partner_count; ?></div>
+                <div class="willsx-stat-label">Partners</div>
+                
+                <div class="willsx-stat"><?php echo $post_count; ?></div>
+                <div class="willsx-stat-label">Posts</div>
+                
+                <div class="willsx-stat"><?php echo $page_count; ?></div>
+                <div class="willsx-stat-label">Pages</div>
+            </div>
+
+            <!-- Documentation Section -->
+            <div class="willsx-card">
+                <h2>Documentation</h2>
+                <div class="willsx-dashboard-grid">
+                    <div class="willsx-dashboard-card">
+                        <h3>Theme Documentation</h3>
+                        <p>Complete guide to setting up and using the WillsX theme.</p>
+                        <a href="<?php echo get_template_directory_uri(); ?>/docs/theme-documentation.md" class="willsx-button">View Guide</a>
                     </div>
-                    <div class="welcome-panel-column">
-                        <h3><?php _e('Quick Stats', 'willsx'); ?></h3>
-                        <ul>
-                            <li><?php printf(_n('%s Partner', '%s Partners', $partner_count, 'willsx'), number_format_i18n($partner_count)); ?></li>
-                            <li><?php printf(_n('%s Post', '%s Posts', $post_count, 'willsx'), number_format_i18n($post_count)); ?></li>
-                            <li><?php printf(_n('%s Page', '%s Pages', $page_count, 'willsx'), number_format_i18n($page_count)); ?></li>
-                        </ul>
+                    <div class="willsx-dashboard-card">
+                        <h3>Partner System Guide</h3>
+                        <p>Learn how to use and manage the partner system.</p>
+                        <a href="<?php echo get_template_directory_uri(); ?>/docs/partner-system-guide.md" class="willsx-button">View Guide</a>
                     </div>
-                    <div class="welcome-panel-column welcome-panel-last">
-                        <h3><?php _e('Documentation', 'willsx'); ?></h3>
-                        <ul>
-                            <li><a href="#" target="_blank"><?php _e('Theme Documentation', 'willsx'); ?></a></li>
-                            <li><a href="#" target="_blank"><?php _e('Partner System Guide', 'willsx'); ?></a></li>
-                            <li><a href="#" target="_blank"><?php _e('Auto Linker Guide', 'willsx'); ?></a></li>
-                        </ul>
+                    <div class="willsx-dashboard-card">
+                        <h3>Auto-Linker Guide</h3>
+                        <p>Configure automatic linking for legal terms.</p>
+                        <a href="<?php echo get_template_directory_uri(); ?>/docs/auto-linker-guide.md" class="willsx-button">View Guide</a>
+                    </div>
+                    <div class="willsx-dashboard-card">
+                        <h3>Dark Mode Guide</h3>
+                        <p>Customize and implement dark mode features.</p>
+                        <a href="<?php echo get_template_directory_uri(); ?>/docs/dark-mode-guide.md" class="willsx-button">View Guide</a>
                     </div>
                 </div>
             </div>
