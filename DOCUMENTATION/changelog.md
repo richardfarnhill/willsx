@@ -1,6 +1,6 @@
 # WillsX Development Changelog
 
-## v0.2.0 - Core Functionality Implementation - [2024-07-12]
+## v0.1.6 - Admin Dashboard Implementation - [2024-07-12]
 
 ### Added
 - Created custom admin dashboard with theme management interface
