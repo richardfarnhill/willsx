@@ -1,0 +1,13 @@
+{
+    "name": "willsx/willsx",
+    "description": "WillsX WordPress Plugin",
+    "type": "wordpress-plugin",
+    "require": {
+        "erusev/parsedown": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "WillsX\\": "inc/"
+        }
+    }
+}
