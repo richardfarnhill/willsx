@@ -1,5 +1,16 @@
 # WillsX Development Changelog
 
+## v0.1.5 - Theme Function Fix 2 - [2024-07-11]
+
+### Added
+- N/A
+
+### Changed
+- Renamed duplicate `willsx_add_image_sizes` function to `willsx_add_theme_image_sizes` in theme-functions.php
+
+### Fixed
+- Resolved fatal error caused by duplicate function declaration for image sizes
+
 ## v0.1.4 - Automated Theme Sync - [2024-07-11]
 
 ### Added
