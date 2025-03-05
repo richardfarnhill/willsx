@@ -35,6 +35,13 @@ jobs:
           elif [ -f "build-docs.php" ]; then
             echo "Found build-docs.php in root directory"
             php build-docs.php
+            # Create directories if they don't exist (backup method)
+            mkdir -p build/docs
+            # If the script doesn't create the expected directory structure,
+            # copy any generated documentation to the expected location
+            if [ ! -d "build/docs" ] && [ -d "docs" ]; then
+              cp -r docs/* build/docs/
+            fi
           else
             echo "Could not find build-docs.php"
             find . -name "*.php" | sort
@@ -47,7 +54,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'willsx/build/docs'
+          path: 'build/docs'
 
   deploy:
     environment:

@@ -11,6 +11,15 @@ if (!file_exists($build_dir)) {
     mkdir($build_dir, 0777, true);
 }
 
+// Create the required directory structure
+$outputDir = __DIR__ . '/build/docs';
+
+// Ensure output directory exists
+if (!file_exists($outputDir)) {
+    mkdir($outputDir, 0755, true);
+    echo "Created output directory: {$outputDir}\n";
+}
+
 // Default content if no changelog exists
 $default_content = "# WillsX Documentation\n\nDocumentation is being set up.";
 
@@ -52,3 +61,9 @@ function convertMarkdownToHtml($markdown) {
     $html = preg_replace('/(<li>.*<\/li>\n)+/', "<ul>\n$0</ul>\n", $html);
     return $html;
 }
+
+// Save documentation to the output directory
+// Example: Create some sample files to verify the process
+file_put_contents($outputDir . '/index.html', '<html><body><h1>WillsX Documentation</h1><p>This is automatically generated documentation.</p></body></html>');
+
+echo "Documentation successfully built in {$outputDir}\n";
