@@ -20,7 +20,7 @@ function willsx_admin_menu() {
     add_menu_page(
         __('WillsX Dashboard', 'willsx'),
         __('WillsX', 'willsx'),
-        'manage_options',
+        'edit_posts',
         'willsx-dashboard',
         'willsx_dashboard_page',
         'dashicons-admin-customizer',
@@ -32,7 +32,7 @@ function willsx_admin_menu() {
         'willsx-dashboard',
         __('Dashboard', 'willsx'),
         __('Dashboard', 'willsx'),
-        'manage_options',
+        'edit_posts',
         'willsx-dashboard',
         'willsx_dashboard_page'
     );
@@ -41,7 +41,7 @@ function willsx_admin_menu() {
         'willsx-dashboard',
         __('Partners', 'willsx'),
         __('Partners', 'willsx'),
-        'manage_options',
+        'edit_posts',
         'edit.php?post_type=partner'
     );
 
@@ -49,7 +49,7 @@ function willsx_admin_menu() {
         'willsx-dashboard',
         __('Auto Linker', 'willsx'),
         __('Auto Linker', 'willsx'),
-        'manage_options',
+        'edit_posts',
         'willsx-autolinker',
         'willsx_autolinker_page'
     );
@@ -58,7 +58,7 @@ function willsx_admin_menu() {
         'willsx-dashboard',
         __('Dark Mode', 'willsx'),
         __('Dark Mode', 'willsx'),
-        'manage_options',
+        'edit_posts',
         'willsx-dark-mode',
         'willsx_dark_mode_page'
     );
@@ -67,7 +67,7 @@ function willsx_admin_menu() {
         'willsx-dashboard',
         __('Theme Settings', 'willsx'),
         __('Theme Settings', 'willsx'),
-        'manage_options',
+        'edit_posts',
         'willsx-settings',
         'willsx_settings_page'
     );
@@ -238,7 +238,7 @@ function willsx_dashboard_page() {
  */
 function willsx_autolinker_page() {
     // Check user capabilities
-    if (!current_user_can('manage_options')) {
+    if (!current_user_can('edit_posts')) {
         return;
     }
 
@@ -364,7 +364,7 @@ function willsx_autolinker_page() {
  */
 function willsx_dark_mode_page() {
     // Check user capabilities
-    if (!current_user_can('manage_options')) {
+    if (!current_user_can('edit_posts')) {
         return;
     }
 
@@ -433,7 +433,7 @@ function willsx_dark_mode_page() {
  */
 function willsx_settings_page() {
     // Check user capabilities
-    if (!current_user_can('manage_options')) {
+    if (!current_user_can('edit_posts')) {
         return;
     }
 

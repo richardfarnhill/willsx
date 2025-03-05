@@ -3,41 +3,58 @@
 
 Write-Host "Installing WillsX Git hooks..." -ForegroundColor Cyan
 
-# Define paths
-$repoRoot = Split-Path -Parent $PSScriptRoot
-$hooksDir = Join-Path $repoRoot "hooks"
-$gitHooksDir = Join-Path $repoRoot ".git\hooks"
+# Get the Git hooks directory
+$hooksDir = git rev-parse --git-path hooks
+$sourceDir = $PSScriptRoot
 
-# Copy post-commit hook
-$postCommitSource = Join-Path $hooksDir "post-commit.ps1"
-$postCommitDest = Join-Path $gitHooksDir "post-commit.ps1"
-Copy-Item -Path $postCommitSource -Destination $postCommitDest -Force
-Write-Host "Installed post-commit hook" -ForegroundColor Green
+# Create backup of existing hooks
+if (Test-Path "$hooksDir/pre-commit") {
+    Copy-Item "$hooksDir/pre-commit" "$hooksDir/pre-commit.backup"
+}
+if (Test-Path "$hooksDir/post-commit") {
+    Copy-Item "$hooksDir/post-commit" "$hooksDir/post-commit.backup"
+}
+if (Test-Path "$hooksDir/pre-push") {
+    Copy-Item "$hooksDir/pre-push" "$hooksDir/pre-push.backup"
+}
 
-# Create post-commit batch file
-$postCommitBat = Join-Path $gitHooksDir "post-commit"
-@"
+# Install pre-commit hook for version checking
+$preCommitContent = @"
 #!/bin/sh
-powershell.exe -ExecutionPolicy Bypass -File ".git/hooks/post-commit.ps1"
-"@ | Out-File -FilePath $postCommitBat -Encoding ascii -Force
-Write-Host "Created post-commit shell script" -ForegroundColor Green
+powershell.exe -ExecutionPolicy Bypass -File "$sourceDir/pre-commit.ps1"
+if [ `$? -ne 0 ]; then
+    exit 1
+fi
+"@
+Set-Content -Path "$hooksDir/pre-commit" -Value $preCommitContent
 
-# Copy pre-push hook
-$prePushSource = Join-Path $hooksDir "pre-push.ps1"
-$prePushDest = Join-Path $gitHooksDir "pre-push.ps1"
-Copy-Item -Path $prePushSource -Destination $prePushDest -Force
-Write-Host "Installed pre-push hook" -ForegroundColor Green
-
-# Create pre-push batch file
-$prePushBat = Join-Path $gitHooksDir "pre-push"
-@"
+# Install post-commit hook for theme syncing
+$postCommitContent = @"
 #!/bin/sh
-powershell.exe -ExecutionPolicy Bypass -File ".git/hooks/pre-push.ps1"
-exit 0
-"@ | Out-File -FilePath $prePushBat -Encoding ascii -Force
-Write-Host "Created pre-push shell script" -ForegroundColor Green
+echo "Running post-commit hook to sync theme files..."
+powershell.exe -ExecutionPolicy Bypass -File "$sourceDir/sync-theme.ps1"
+"@
+Set-Content -Path "$hooksDir/post-commit" -Value $postCommitContent
 
-Write-Host "Git hooks installed successfully!" -ForegroundColor Cyan
-Write-Host "These hooks will automatically sync theme files after commits and before pushes." -ForegroundColor Cyan
+# Install pre-push hook for theme syncing
+$prePushContent = @"
+#!/bin/sh
+echo "Running pre-push hook to sync theme files..."
+powershell.exe -ExecutionPolicy Bypass -File "$sourceDir/sync-theme.ps1"
+"@
+Set-Content -Path "$hooksDir/pre-push" -Value $prePushContent
+
+# Make hooks executable
+if ($IsLinux -or $IsMacOS) {
+    chmod +x "$hooksDir/pre-commit"
+    chmod +x "$hooksDir/post-commit"
+    chmod +x "$hooksDir/pre-push"
+}
+
+Write-Host "Git hooks installed successfully!" -ForegroundColor Green
+Write-Host "The following hooks were installed:" -ForegroundColor Yellow
+Write-Host "- pre-commit (version check)" -ForegroundColor Yellow
+Write-Host "- post-commit (theme sync)" -ForegroundColor Yellow
+Write-Host "- pre-push (theme sync)" -ForegroundColor Yellow
 
 exit 0 

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Get the latest version from the remote repository
+REMOTE_VERSION=$(git ls-remote --tags origin | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*' | sort -V | tail -n 1)
+
+# Get the latest version from the changelog
+CHANGELOG_VERSION=$(grep -o 'v[0-9]*\.[0-9]*\.[0-9]*' DOCUMENTATION/changelog.md | sort -V | tail -n 1)
+
+if [ "$REMOTE_VERSION" != "$CHANGELOG_VERSION" ]; then
+    echo "ERROR: Version mismatch detected!"
+    echo "Remote version: $REMOTE_VERSION"
+    echo "Changelog version: $CHANGELOG_VERSION"
+    echo "Please update DOCUMENTATION/changelog.md to match the remote version before committing."
+    exit 1
+fi
+
+# Continue with the commit if versions match
+exit 0 
