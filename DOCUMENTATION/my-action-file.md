@@ -3,6 +3,8 @@
 ## Sync GitHub Repo with Local File ✅
 - [x] Copy-Item -Path "C:\Users\richa\Dev Projects\projects\WillsX\willsx\src\themes\willsx\*" -Destination "C:\Users\richa\Local Sites\willsx\app\public\wp-content\themes\willsx\" -Recurse -Force
 
+[All dates in tasks and deadlines should reflect current year timeline and be in DD-MMM-YYYY format]
+
 ## 1. Technical Setup & Hosting
 
 - [ ] Select and purchase managed WordPress hosting (WP Engine, Kinsta, or 20i)

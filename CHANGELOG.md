@@ -1,5 +1,8 @@
 # Changelog
-All notable changes to this project will be documented in this file.
+
+## [1.2.1] - 14/12/2023
+### Added
+- GitHub Pages deployment workflow configuration
 
 ## [1.2.0] - 2024-01-XX
 ### Added

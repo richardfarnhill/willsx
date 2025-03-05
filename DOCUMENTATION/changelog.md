@@ -1,11 +1,25 @@
 # WillsX Development Changelog
 
-## [v0.1.19] - 05/03/2024
+## [v1.2.0] - 05-03-2025
+### Added
+- Documentation viewer in admin dashboard
+- Simple Markdown parser implementation
+- Documentation section in admin menu
+
+### Changed
+- Updated admin menu permissions from 'manage_options' to 'edit_posts'
+- Improved documentation link handling to prevent direct file downloads
+
+### Fixed
+- Left-side menu permission issues
+- Documentation link handling in admin dashboard
+
+## [v0.1.19] - 05-03-2025
 
 ### Changed
 - Updated admin menu capability requirements from 'manage_options' to 'edit_posts' to allow editors and authors access to the WillsX dashboard and its features
 
-## v0.1.18 - Version Control Enhancement - [05/03/2025]
+## v0.1.18 - Version Control Enhancement - [05-03-2025]
 
 ### Added
 - Git pre-commit hook for version synchronization
@@ -20,7 +34,7 @@
 - Version synchronization between changelog and repository tags
 - Documentation versioning inconsistencies
 
-## v0.1.17 - Documentation System Update - [05/03/2025]
+## v0.1.17 - Documentation System Update - [05-03-2025]
 
 ### Added
 - Comprehensive documentation system
@@ -38,7 +52,7 @@
 - Documentation structure and organization
 - File locations to match project rules
 
-## v0.1.16 - Hook System Enhancement - [05/03/2025]
+## v0.1.16 - Hook System Enhancement - [05-03-2025]
 
 ### Added
 - Enhanced Git hook system
@@ -54,7 +68,7 @@
 - Hook execution permissions
 - Theme sync reliability
 
-## v0.1.15 - System Integration - [05/03/2025]
+## v0.1.15 - System Integration - [05-03-2025]
 
 ### Added
 - System preference detection for dark mode
@@ -69,7 +83,7 @@
 - Various system integration issues
 - API response handling
 
-## v0.1.14 - Performance Optimization - [05/03/2025]
+## v0.1.14 - Performance Optimization - [05-03-2025]
 
 ### Added
 - Performance monitoring
@@ -85,7 +99,7 @@
 - Performance bottlenecks
 - Resource usage issues
 
-## v0.1.13 - Security Enhancement - [05/03/2025]
+## v0.1.13 - Security Enhancement - [05-03-2025]
 
 ### Added
 - Enhanced security measures
@@ -100,7 +114,7 @@
 - Security vulnerabilities
 - Data validation issues
 
-## v0.1.12 - Partner System Enhancement - [05/03/2025]
+## v0.1.12 - Partner System Enhancement - [05-03-2025]
 
 ### Added
 - Enhanced partner management features
@@ -115,7 +129,7 @@
 - Partner system bugs
 - Dashboard display issues
 
-## v0.1.11 - Auto-Linker Enhancement - [05/03/2025]
+## v0.1.11 - Auto-Linker Enhancement - [05-03-2025]
 
 ### Added
 - Enhanced keyword management
@@ -130,7 +144,7 @@
 - Link generation issues
 - Keyword matching bugs
 
-## v0.1.10 - Dark Mode Enhancement - [05/03/2025]
+## v0.1.10 - Dark Mode Enhancement - [05-03-2025]
 
 ### Added
 - Enhanced color customization
@@ -145,7 +159,7 @@
 - Theme switching issues
 - Color inconsistencies
 
-## v0.1.9 - UI/UX Enhancement - [05/03/2025]
+## v0.1.9 - UI/UX Enhancement - [05-03-2025]
 
 ### Added
 - Enhanced user interface elements
@@ -160,7 +174,7 @@
 - UI inconsistencies
 - Navigation issues
 
-## v0.1.8 - Documentation Enhancement - [05/03/2025]
+## v0.1.8 - Documentation Enhancement - [05-03-2025]
 
 ### Added
 - Created comprehensive theme documentation set:
@@ -180,7 +194,7 @@
 - Removed incorrect versioning from individual documentation files
 - Relocated changelog to follow project structure rules
 
-## v0.1.7 - Partner Dashboard and Homepage - [12/07/2024]
+## v0.1.7 - Partner Dashboard and Homepage - [12-07-2024]
 
 ### Added
 - Implemented partner dashboard functionality
@@ -202,7 +216,7 @@
 ### Fixed
 - Resolved fatal error caused by duplicate willsx_get_partner_clients() function declaration
 
-## v0.1.6 - Admin Dashboard Implementation - [12/07/2024]
+## v0.1.6 - Admin Dashboard Implementation - [12-07-2024]
 
 ### Added
 - Created custom admin dashboard with theme management interface
@@ -219,7 +233,7 @@
 ### Fixed
 - N/A
 
-## v0.1.5 - Theme Function Fix 2 - [11/07/2024]
+## v0.1.5 - Theme Function Fix 2 - [11-07-2024]
 
 ### Added
 - N/A
@@ -230,7 +244,7 @@
 ### Fixed
 - Resolved fatal error caused by duplicate function declaration for image sizes
 
-## v0.1.4 - Automated Theme Sync - [11/07/2024]
+## v0.1.4 - Automated Theme Sync - [11-07-2024]
 
 ### Added
 - Added Git hooks for automatic theme syncing
@@ -246,7 +260,7 @@
 ### Fixed
 - N/A
 
-## v0.1.3 - Theme Function Fix - [11/07/2024]
+## v0.1.3 - Theme Function Fix - [11-07-2024]
 
 ### Added
 - N/A
@@ -257,7 +271,7 @@
 ### Fixed
 - Resolved fatal error caused by duplicate function declaration
 
-## v0.1.2 - Project Rules Enhancement - [11/07/2024]
+## v0.1.2 - Project Rules Enhancement - [11-07-2024]
 
 ### Added
 - Added theme sync command to project rules
@@ -270,7 +284,7 @@
 ### Fixed
 - N/A
 
-## v0.1.1 - Deployment Documentation - [10/07/2024]
+## v0.1.1 - Deployment Documentation - [10-07-2024]
 
 ### Added
 - Created comprehensive deployment guide for development/staging environments
@@ -283,7 +297,7 @@
 ### Fixed
 - N/A
 
-## v0.1.0 - Project Initialization - [10/07/2024]
+## v0.1.0 - Project Initialization - [10-07-2024]
 
 ### Added
 - Created initial project documentation 
@@ -309,4 +323,4 @@
 - External service integrations (HubSpot, ClickUp, etc.)
 - Analytics and tracking configuration
 - GDPR compliance implementation
-- Automation workflow setup 
+- Automation workflow setup
