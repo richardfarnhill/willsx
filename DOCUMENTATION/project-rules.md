@@ -27,7 +27,6 @@ Copyright © 2025 Richard Farnhill. All rights reserved.
 
 ## Documentation Rules
 - All documentation should be maintained in the appropriate directories
-- Documentation must be clear and up-to-date and placed within a dedicated DOCUMENTATION folder. The only documentation that should be placed in the root is README.MD
 
 ## Project Structure
 - /DOCUMENTATION - All documentation other than README.MD
