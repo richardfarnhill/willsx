@@ -33,6 +33,7 @@ Copyright © 2025 Richard Farnhill. All rights reserved.
 - /DOCUMENTATION - All documentation other than README.MD
 - /src: Source code only
 - /scripts: Utility scripts 
+- /hooks: Git hooks for automation
 - Root directory: Documentation and configuration files
 
 ## Critical Files
@@ -68,6 +69,7 @@ Copyright © 2025 Richard Farnhill. All rights reserved.
   ```
   - This ensures your local WordPress installation stays in sync with your repository
   - Adjust paths as needed for your local environment
+  - **Note**: Git hooks are set up to automate this process. Run `hooks/install-hooks.bat` to install them.
 - No force pushing without approval
 - No public forking or cloning without authorization
 
@@ -115,3 +117,10 @@ Copyright © 2025 Richard Farnhill. All rights reserved.
      Copy-Item -Path "C:\Users\richa\Dev Projects\projects\WillsX\willsx\src\themes\willsx\*" -Destination "C:\Users\richa\Local Sites\willsx\app\public\wp-content\themes\willsx\" -Recurse -Force
      ```
   2. Confirm the sync was successful
+
+- When the user enters 'install-hooks' (without quotation marks) please:
+  1. Run the hook installation script:
+     ```
+     powershell.exe -ExecutionPolicy Bypass -File "hooks/install-hooks.ps1"
+     ```
+  2. Confirm the hooks were installed successfully

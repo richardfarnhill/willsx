@@ -1,5 +1,21 @@
 # WillsX Development Changelog
 
+## v0.1.4 - Automated Theme Sync - [2024-07-11]
+
+### Added
+- Added Git hooks for automatic theme syncing
+- Created post-commit hook to sync theme files after commits
+- Created pre-push hook to sync theme files before pushes
+- Added hook installation script and batch file
+- Added standalone theme sync script and batch file
+
+### Changed
+- Updated project rules to include information about Git hooks
+- Added new user shortcut for installing Git hooks
+
+### Fixed
+- N/A
+
 ## v0.1.3 - Theme Function Fix - [2024-07-11]
 
 ### Added
