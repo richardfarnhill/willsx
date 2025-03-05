@@ -10,14 +10,34 @@
  */
 
 ?>
-<!doctype html>
-<html <?php language_attributes(); ?> class="no-js">
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-
+	<meta charset="<?php bloginfo('charset'); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php wp_head(); ?>
+	<?php
+	// Get partner branding if this is a partner page
+	$partner_id = willsx_get_current_partner_id();
+	if ($partner_id) {
+		$partner = get_post($partner_id);
+		$logo_id = get_post_meta($partner_id, '_partner_logo_id', true);
+		$primary_color = get_post_meta($partner_id, '_partner_primary_color', true);
+		$secondary_color = get_post_meta($partner_id, '_partner_secondary_color', true);
+		$accent_color = get_post_meta($partner_id, '_partner_accent_color', true);
+		$font_family = get_post_meta($partner_id, '_partner_font_family', true);
+		?>
+		<style>
+			:root {
+				--partner-primary: <?php echo esc_attr($primary_color); ?>;
+				--partner-secondary: <?php echo esc_attr($secondary_color); ?>;
+				--partner-accent: <?php echo esc_attr($accent_color); ?>;
+				--partner-font: <?php echo esc_attr($font_family); ?>;
+			}
+		</style>
+		<?php
+	}
+	?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -33,72 +53,85 @@
 <?php endif; ?>
 
 <div id="page" class="site">
-    <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'willsx'); ?></a>
-
-    <?php
-    // Check if we need to display co-branding
-    $partner_data = isset( $args['partner_data'] ) ? $args['partner_data'] : null;
-    if ( $partner_data ) {
-        get_template_part( 'template-parts/header/cobranding', null, array( 'partner_data' => $partner_data ) );
-    }
-    ?>
+    <a class="skip-link screen-reader-text" href="#primary">
+        <?php esc_html_e('Skip to content', 'willsx'); ?>
+    </a>
 
     <header id="masthead" class="site-header">
-        <div class="container">
+        <div class="header-container">
             <div class="site-branding">
-                <?php
-                if ( has_custom_logo() ) :
-                    the_custom_logo();
-                else :
-                    ?>
-                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-                    <?php
-                    $willsx_description = get_bloginfo( 'description', 'display' );
-                    if ( $willsx_description || is_customize_preview() ) :
-                        ?>
-                        <p class="site-description"><?php echo $willsx_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-                    <?php endif; ?>
+                <?php if ($partner_id && $logo_id) : ?>
+                    <div class="partner-logo">
+                        <?php echo wp_get_attachment_image($logo_id, 'full'); ?>
+                    </div>
                 <?php endif; ?>
-            </div><!-- .site-branding -->
+                
+                <div class="site-logo">
+                    <?php
+                    if (has_custom_logo()) {
+                        the_custom_logo();
+                    } else {
+                        ?>
+                        <h1 class="site-title">
+                            <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                                <?php bloginfo('name'); ?>
+                            </a>
+                        </h1>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
 
             <nav id="site-navigation" class="main-navigation">
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Open menu', 'willsx' ); ?>">
-                    <span class="menu-toggle-icon">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </span>
+                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                    <span class="menu-toggle-icon"></span>
+                    <span class="screen-reader-text"><?php esc_html_e('Menu', 'willsx'); ?></span>
                 </button>
-                <div class="primary-menu-container">
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'primary',
+                    'menu_id'        => 'primary-menu',
+                    'container_class' => 'primary-menu-container',
+                    'fallback_cb'    => false,
+                ));
+                ?>
+            </nav>
+
+            <div class="header-actions">
+                <?php if (is_user_logged_in()) : ?>
+                    <a href="<?php echo esc_url(admin_url()); ?>" class="dashboard-link">
+                        <span class="dashicons dashicons-dashboard"></span>
+                        <?php esc_html_e('Dashboard', 'willsx'); ?>
+                    </a>
+                <?php else : ?>
+                    <a href="<?php echo esc_url(wp_login_url()); ?>" class="login-link">
+                        <span class="dashicons dashicons-admin-users"></span>
+                        <?php esc_html_e('Login', 'willsx'); ?>
+                    </a>
+                <?php endif; ?>
+                
+                <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="<?php esc_attr_e('Toggle dark mode', 'willsx'); ?>">
+                    <span class="dark-mode-icon sun"></span>
+                    <span class="dark-mode-icon moon"></span>
+                </button>
+            </div>
+        </div>
+
+        <?php if ($partner_id) : ?>
+            <div class="partner-banner">
+                <div class="partner-banner-content">
                     <?php
-                    wp_nav_menu(
-                        array(
-                            'theme_location' => 'menu-1',
-                            'menu_id'        => 'primary-menu',
-                            'container'      => false,
-                        )
+                    printf(
+                        /* translators: %s: partner name */
+                        esc_html__('You are viewing %s\'s branded portal', 'willsx'),
+                        esc_html($partner->post_title)
                     );
                     ?>
                 </div>
-                <button class="theme-toggle" aria-label="<?php esc_attr_e( 'Switch to dark mode', 'willsx' ); ?>">
-                    <svg class="dark-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="light-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </nav><!-- #site-navigation -->
-        </div><!-- .container -->
-    </header><!-- #masthead -->
+            </div>
+        <?php endif; ?>
+    </header>
 
     <div id="content" class="site-content">
         <div class="container">
