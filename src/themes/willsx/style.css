@@ -1,0 +1,24 @@
+/*!
+Theme Name: WillsX
+Theme URI: https://willsx.com/
+Author: WillsX Team
+Author URI: https://willsx.com/
+Description: A modern WordPress theme for WillsX, a wills and estate planning service.
+Version: 1.0.0
+Requires at least: 5.0
+Tested up to: 6.2
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: willsx
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+WillsX is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+*/
+
+/* This file is intentionally left mostly empty. 
+   The main CSS is loaded from assets/css/main.css */ 

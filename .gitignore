@@ -46,3 +46,8 @@ wp-config.php
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
+
+# Added per client request
+DOCUMENTATION/project-rules.md
+DOCUMENTATION/project-setup.md
+# Add the third file here when specified
