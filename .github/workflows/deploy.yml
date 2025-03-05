@@ -17,8 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      REMOTE_NAME: origin
     steps:
       - uses: actions/checkout@v4
       
@@ -28,7 +26,20 @@ jobs:
           php-version: '8.2'
           
       - name: Create documentation
-        run: php build-docs.php
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la
+          if [ -f "willsx/build-docs.php" ]; then
+            echo "Found build-docs.php in willsx directory"
+            php willsx/build-docs.php
+          elif [ -f "build-docs.php" ]; then
+            echo "Found build-docs.php in root directory"
+            php build-docs.php
+          else
+            echo "Could not find build-docs.php"
+            find . -name "*.php" | sort
+            exit 1
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -36,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'build/docs'
+          path: 'willsx/build/docs'
 
   deploy:
     environment:
