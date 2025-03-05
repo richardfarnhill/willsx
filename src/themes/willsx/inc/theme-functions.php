@@ -84,9 +84,9 @@ function willsx_show_jurisdiction_warning() {
 }
 
 /**
- * Add custom image sizes
+ * Add theme-specific custom image sizes
  */
-function willsx_add_image_sizes() {
+function willsx_add_theme_image_sizes() {
     // Featured post size
     add_image_size('willsx-featured', 1200, 630, true);
     
@@ -96,7 +96,7 @@ function willsx_add_image_sizes() {
     // Team member photo size
     add_image_size('willsx-team', 400, 400, true);
 }
-add_action('after_setup_theme', 'willsx_add_image_sizes');
+add_action('after_setup_theme', 'willsx_add_theme_image_sizes');
 
 /**
  * Dark mode toggle functionality
