@@ -1,5 +1,16 @@
 # WillsX Development Changelog
 
+## v0.1.3 - Theme Function Fix - [2024-07-11]
+
+### Added
+- N/A
+
+### Changed
+- Renamed duplicate `willsx_body_classes` function to `willsx_custom_body_classes` in theme-functions.php
+
+### Fixed
+- Resolved fatal error caused by duplicate function declaration
+
 ## v0.1.2 - Project Rules Enhancement - [2024-07-11]
 
 ### Added
