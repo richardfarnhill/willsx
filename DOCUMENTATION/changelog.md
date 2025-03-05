@@ -1,5 +1,27 @@
 # WillsX Development Changelog
 
+## v0.1.7 - Partner Dashboard and Homepage - [2024-07-12]
+
+### Added
+- Implemented partner dashboard functionality
+  - Created partner dashboard template with branding customization
+  - Added partner roles and capabilities system
+  - Created partner functions and helper utilities
+  - Added dashboard-specific CSS and JavaScript
+  - Implemented AJAX handlers for dynamic functionality
+- Created homepage template with partner integration
+- Added partner branding support in header and footer
+- Implemented partner-specific navigation and styling
+
+### Changed
+- Updated header.php and footer.php for partner integration
+- Enhanced post types with partner-specific functionality
+- Improved theme structure with new template organization
+- Refactored partner functions to remove duplicate code
+
+### Fixed
+- Resolved fatal error caused by duplicate willsx_get_partner_clients() function declaration
+
 ## v0.1.6 - Admin Dashboard Implementation - [2024-07-12]
 
 ### Added

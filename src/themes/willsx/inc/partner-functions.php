@@ -468,66 +468,51 @@ function willsx_generate_analytics_report($partner_id) {
 }
 
 /**
- * Get partner clients count
+ * Get partner client count
+ *
+ * @param int $partner_id Partner ID
+ * @return int Number of clients
  */
 function willsx_get_partner_client_count($partner_id) {
-    $args = array(
-        'meta_key' => '_partner_id',
-        'meta_value' => $partner_id,
-        'count_total' => true,
-        'fields' => 'ID'
-    );
-    
-    $users = new WP_User_Query($args);
-    return $users->get_total();
+    $clients = willsx_get_partner_clients($partner_id);
+    return count($clients);
 }
 
 /**
  * Get partner completed wills count
+ *
+ * @param int $partner_id Partner ID
+ * @return int Number of completed wills
  */
 function willsx_get_partner_completed_wills_count($partner_id) {
     $args = array(
-        'post_type' => 'will',
         'meta_query' => array(
             array(
-                'key' => '_partner_id',
-                'value' => $partner_id
-            ),
-            array(
                 'key' => '_will_status',
-                'value' => 'completed'
+                'value' => 'completed',
+                'compare' => '='
             )
-        ),
-        'posts_per_page' => -1
+        )
     );
-    
-    $wills = new WP_Query($args);
-    return $wills->found_posts;
+    $clients = willsx_get_partner_clients($partner_id, $args);
+    return count($clients);
 }
 
 /**
  * Get partner revenue
+ *
+ * @param int $partner_id Partner ID
+ * @return float Total revenue
  */
 function willsx_get_partner_revenue($partner_id) {
-    $revenue = get_post_meta($partner_id, '_total_revenue', true);
-    return number_format((float)$revenue, 2);
-}
-
-/**
- * Get partner clients
- */
-function willsx_get_partner_clients($partner_id) {
-    $args = array(
-        'meta_key' => '_partner_id',
-        'meta_value' => $partner_id
-    );
-    
-    $users = new WP_User_Query($args);
-    return $users->get_results();
+    return willsx_get_partner_stats($partner_id)['total_revenue'];
 }
 
 /**
  * Get client will status
+ *
+ * @param int $user_id User ID
+ * @return string Will status
  */
 function willsx_get_client_will_status($user_id) {
     $args = array(
