@@ -1,11 +1,14 @@
 # WillsX Implementation Action Checklist
 
+## Sync GitHub Repo with Local File ✅
+- [x] Copy-Item -Path "C:\Users\richa\Dev Projects\projects\WillsX\willsx\src\themes\willsx\*" -Destination "C:\Users\richa\Local Sites\willsx\app\public\wp-content\themes\willsx\" -Recurse -Force
+
 ## 1. Technical Setup & Hosting
 
 - [ ] Select and purchase managed WordPress hosting (WP Engine, Kinsta, or 20i)
 - [ ] Purchase domain name and set up DNS with CloudFlare
-- [ ] Set up development environment (Local by Flywheel or DevKinsta)
-- [ ] Create GitHub repository for version control
+- [x] Set up development environment (Local by Flywheel or DevKinsta)
+- [x] Create GitHub repository for version control
 - [ ] Configure GitHub Actions for automated deployment workflow
 - [ ] Set up automated backup solution (UpdraftPlus Premium)
 - [ ] Create staging environment for testing
@@ -14,7 +17,7 @@
 
 ## 2. WordPress Configuration
 
-- [ ] Install WordPress core
+- [x] Install WordPress core
 - [ ] Configure security settings in wp-config.php
 - [ ] Set up custom database prefix (not default 'wp_')
 - [ ] Configure proper file permissions
