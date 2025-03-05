@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      REMOTE_NAME: origin
     steps:
       - uses: actions/checkout@v4
       
