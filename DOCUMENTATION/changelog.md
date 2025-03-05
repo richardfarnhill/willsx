@@ -304,4 +304,9 @@
 - External service integrations (HubSpot, ClickUp, etc.)
 - Analytics and tracking configuration
 - GDPR compliance implementation
-- Automation workflow setup 
+- Automation workflow setup
+
+## [v0.1.19] - 05/03/2024
+
+### Changed
+- Updated admin menu capability requirements from 'manage_options' to 'edit_posts' to allow editors and authors access to the WillsX dashboard and its features 
