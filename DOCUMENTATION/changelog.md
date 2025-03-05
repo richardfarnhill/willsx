@@ -1,5 +1,18 @@
 # WillsX Development Changelog
 
+## v0.1.2 - Project Rules Enhancement - [2024-07-11]
+
+### Added
+- Added theme sync command to project rules
+- Created shortcut for syncing theme files to local WordPress installation
+- Implemented post-push workflow to ensure local WordPress stays in sync with repository
+
+### Changed
+- Updated version control documentation with sync requirements
+
+### Fixed
+- N/A
+
 ## v0.1.1 - Deployment Documentation - [2024-07-10]
 
 ### Added
