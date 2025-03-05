@@ -9,7 +9,7 @@ WillsX is designed to provide non-traditional customers with access to will crea
 ## Key Features
 
 - Co-branded partner landing pages with comprehensive analytics
-- Modern, accessible user interface inspired by Secfi.com
+- Modern, accessible user interface inspired by Sxxx.com
 - Online will instruction process
 - Video consultation booking system
 - Region-specific disclaimer for visitors outside England and Wales

@@ -34,7 +34,7 @@
 
 ## 3. Theme & Design
 
-- [ ] Finalize visual design inspiration from Secfi.com
+- [ ] Finalize visual design inspiration from Sxxx.com
 - [ ] Implement final theme adjustments based on client feedback
 - [ ] Add custom logo files and favicon
 - [ ] Optimize image assets for performance

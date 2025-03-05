@@ -1,7 +1,7 @@
 # WillsX WordPress Implementation Plan
 
 ## Project Overview
-WillsX is a professional WordPress site for will and LPA services in England and Wales, designed to reach non-traditional customers. The site will feature co-branded partner landing pages, a modern UI inspired by Secfi.com, and both online will instruction processes and guided video call services.
+WillsX is a professional WordPress site for will and LPA services in England and Wales, designed to reach non-traditional customers. The site will feature co-branded partner landing pages, a modern UI inspired by Sxxx.com, and both online will instruction processes and guided video call services.
 
 ## 1. Technical Foundation
 
@@ -47,7 +47,7 @@ WillsX is a professional WordPress site for will and LPA services in England and
 ## 3. Custom Theme Development
 
 ### Design Foundation
-- Create custom theme based on Secfi.com visual style
+- Create custom theme based on Sxxx.com visual style
 - Implement using block-based theme architecture (Full Site Editing)
 - Develop with mobile-first responsive approach
 - Accessibility features including light/dark mode toggle
@@ -55,7 +55,7 @@ WillsX is a professional WordPress site for will and LPA services in England and
 ### Key Theme Components
 - Custom header with dynamic navigation
 - Hero sections with adaptable co-branding
-- Service cards and CTAs matching Secfi aesthetic
+- Service cards and CTAs matching Sxxx aesthetic
 - Custom footer with dynamic widget areas
 - Blog layout with featured posts section
 
