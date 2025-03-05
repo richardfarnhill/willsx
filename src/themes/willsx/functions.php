@@ -411,4 +411,44 @@ function willsx_get_header() {
 	$args = apply_filters( 'willsx_header_args', $args );
 	
 	get_header( null, $args );
-} 
+}
+
+/**
+ * Enqueue scripts and styles for the partner dashboard
+ */
+function willsx_enqueue_partner_dashboard_assets() {
+    if (is_page_template('template-partner-dashboard.php')) {
+        // Styles
+        wp_enqueue_style(
+            'willsx-partner-dashboard',
+            get_template_directory_uri() . '/assets/css/partner-dashboard.css',
+            array(),
+            WILLSX_VERSION
+        );
+        wp_enqueue_style('datatables', 'https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css');
+
+        // Scripts
+        wp_enqueue_script('chart-js', 'https://cdn.jsdelivr.net/npm/chart.js', array(), '3.7.0', true);
+        wp_enqueue_script('datatables', 'https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js', array('jquery'), '1.10.24', true);
+        wp_enqueue_script(
+            'willsx-partner-dashboard',
+            get_template_directory_uri() . '/assets/js/partner-dashboard.js',
+            array('jquery', 'chart-js', 'datatables'),
+            WILLSX_VERSION,
+            true
+        );
+
+        // Localize script
+        wp_localize_script('willsx-partner-dashboard', 'willsx_ajax', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('willsx_nonce')
+        ));
+    }
+}
+add_action('wp_enqueue_scripts', 'willsx_enqueue_partner_dashboard_assets');
+
+/**
+ * Include required files
+ */
+require_once get_template_directory() . '/inc/roles.php';
+require_once get_template_directory() . '/inc/partner-functions.php'; 
