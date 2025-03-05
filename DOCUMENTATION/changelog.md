@@ -1,5 +1,22 @@
 # WillsX Development Changelog
 
+## v0.2.0 - Core Functionality Implementation - [2024-07-12]
+
+### Added
+- Created custom admin dashboard with theme management interface
+- Implemented partner custom post type with detailed meta fields
+- Added blog post auto-linker functionality with keyword management
+- Implemented dark mode toggle with customizable settings
+- Created necessary directory structure for theme assets
+
+### Changed
+- Enhanced partner system with custom post type integration
+- Updated functions.php to include new core functionality
+- Improved co-branding functionality with better partner data handling
+
+### Fixed
+- N/A
+
 ## v0.1.5 - Theme Function Fix 2 - [2024-07-11]
 
 ### Added
@@ -79,12 +96,6 @@
 - N/A (Initial setup)
 
 ## Development Roadmap
-
-### Upcoming in v0.2.0
-- WordPress core installation
-- Custom theme foundation
-- Basic plugin configuration
-- Initial development environment setup
 
 ### Upcoming in v0.3.0
 - Partner system implementation

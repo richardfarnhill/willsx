@@ -248,6 +248,26 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /**
+ * Load custom post types.
+ */
+require get_template_directory() . '/inc/post-types.php';
+
+/**
+ * Load admin dashboard functionality.
+ */
+require get_template_directory() . '/inc/admin-dashboard.php';
+
+/**
+ * Load auto-linker functionality.
+ */
+require get_template_directory() . '/inc/auto-linker.php';
+
+/**
+ * Load dark mode functionality.
+ */
+require get_template_directory() . '/inc/dark-mode.php';
+
+/**
  * Co-branding functions
  */
 
@@ -257,46 +277,109 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * @return array|null Partner data or null if no partner
  */
 function willsx_get_partner_data() {
-	// This would typically come from a database or API
-	// For now, we'll check for a query parameter or cookie
-	
-	$partner_id = null;
-	
-	// Check for partner ID in query string
-	if ( isset( $_GET['partner'] ) ) {
-		$partner_id = sanitize_text_field( $_GET['partner'] );
+	// Check if we have a partner post type
+	if ( function_exists('get_post_type_object') && get_post_type_object('partner') ) {
+		// This would typically come from a database or API
+		// For now, we'll check for a query parameter or cookie
 		
-		// Set a cookie to remember the partner
-		if ( ! headers_sent() ) {
-			setcookie( 'willsx_partner', $partner_id, time() + ( 30 * DAY_IN_SECONDS ), COOKIEPATH, COOKIE_DOMAIN );
+		$partner_id = null;
+		
+		// Check for partner ID in query string
+		if ( isset( $_GET['partner'] ) ) {
+			$partner_id = sanitize_text_field( $_GET['partner'] );
+			
+			// Set a cookie to remember the partner
+			if ( ! headers_sent() ) {
+				setcookie( 'willsx_partner', $partner_id, time() + ( 30 * DAY_IN_SECONDS ), COOKIEPATH, COOKIE_DOMAIN );
+			}
+		} 
+		// Check for partner ID in cookie
+		elseif ( isset( $_COOKIE['willsx_partner'] ) ) {
+			$partner_id = sanitize_text_field( $_COOKIE['willsx_partner'] );
 		}
-	} 
-	// Check for partner ID in cookie
-	elseif ( isset( $_COOKIE['willsx_partner'] ) ) {
-		$partner_id = sanitize_text_field( $_COOKIE['willsx_partner'] );
-	}
-	
-	// If we have a partner ID, get the partner data
-	if ( $partner_id ) {
-		// In a real implementation, this would query a database or API
-		// For demonstration, we'll use a simple array of sample partners
-		$partners = array(
-			'acme' => array(
-				'name' => 'ACME Financial Services',
-				'logo' => get_template_directory_uri() . '/assets/images/partners/acme-logo.png',
-			),
-			'globex' => array(
-				'name' => 'Globex Corporation',
-				'logo' => get_template_directory_uri() . '/assets/images/partners/globex-logo.png',
-			),
-			'initech' => array(
-				'name' => 'Initech',
-				'logo' => get_template_directory_uri() . '/assets/images/partners/initech-logo.png',
-			),
-		);
 		
-		if ( isset( $partners[ $partner_id ] ) ) {
-			return array_merge( array( 'id' => $partner_id ), $partners[ $partner_id ] );
+		// If we have a partner ID, get the partner data
+		if ( $partner_id ) {
+			// Try to get partner from custom post type
+			$partner_query = new WP_Query(array(
+				'post_type' => 'partner',
+				'name' => $partner_id,
+				'posts_per_page' => 1
+			));
+			
+			if ( $partner_query->have_posts() ) {
+				$partner_query->the_post();
+				$partner_data = array(
+					'id' => $partner_id,
+					'name' => get_the_title(),
+					'logo' => get_the_post_thumbnail_url(null, 'medium'),
+					'website' => get_post_meta(get_the_ID(), 'partner_website', true),
+					'primary_color' => get_post_meta(get_the_ID(), 'partner_primary_color', true),
+				);
+				wp_reset_postdata();
+				return $partner_data;
+			}
+			
+			// Fallback to sample partners if no custom post found
+			$partners = array(
+				'acme' => array(
+					'name' => 'ACME Financial Services',
+					'logo' => get_template_directory_uri() . '/assets/images/partners/acme-logo.png',
+				),
+				'globex' => array(
+					'name' => 'Globex Corporation',
+					'logo' => get_template_directory_uri() . '/assets/images/partners/globex-logo.png',
+				),
+				'initech' => array(
+					'name' => 'Initech',
+					'logo' => get_template_directory_uri() . '/assets/images/partners/initech-logo.png',
+				),
+			);
+			
+			if ( isset( $partners[ $partner_id ] ) ) {
+				return array_merge( array( 'id' => $partner_id ), $partners[ $partner_id ] );
+			}
+		}
+	} else {
+		// Fallback if partner post type is not available
+		$partner_id = null;
+		
+		// Check for partner ID in query string
+		if ( isset( $_GET['partner'] ) ) {
+			$partner_id = sanitize_text_field( $_GET['partner'] );
+			
+			// Set a cookie to remember the partner
+			if ( ! headers_sent() ) {
+				setcookie( 'willsx_partner', $partner_id, time() + ( 30 * DAY_IN_SECONDS ), COOKIEPATH, COOKIE_DOMAIN );
+			}
+		} 
+		// Check for partner ID in cookie
+		elseif ( isset( $_COOKIE['willsx_partner'] ) ) {
+			$partner_id = sanitize_text_field( $_COOKIE['willsx_partner'] );
+		}
+		
+		// If we have a partner ID, get the partner data
+		if ( $partner_id ) {
+			// In a real implementation, this would query a database or API
+			// For demonstration, we'll use a simple array of sample partners
+			$partners = array(
+				'acme' => array(
+					'name' => 'ACME Financial Services',
+					'logo' => get_template_directory_uri() . '/assets/images/partners/acme-logo.png',
+				),
+				'globex' => array(
+					'name' => 'Globex Corporation',
+					'logo' => get_template_directory_uri() . '/assets/images/partners/globex-logo.png',
+				),
+				'initech' => array(
+					'name' => 'Initech',
+					'logo' => get_template_directory_uri() . '/assets/images/partners/initech-logo.png',
+				),
+			);
+			
+			if ( isset( $partners[ $partner_id ] ) ) {
+				return array_merge( array( 'id' => $partner_id ), $partners[ $partner_id ] );
+			}
 		}
 	}
 	

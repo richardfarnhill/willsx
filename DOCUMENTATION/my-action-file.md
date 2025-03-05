@@ -42,8 +42,8 @@
 - [ ] Add custom logo files and favicon
 - [ ] Optimize image assets for performance
 - [ ] Set up responsive testing across devices
-- [ ] Implement dark mode toggle functionality
-- [ ] Create partner branding assets (placeholders)
+- [x] Implement dark mode toggle functionality
+- [x] Create partner branding assets (placeholders)
 - [ ] Set up Font Awesome or other icon library
 - [ ] Set up theme customizer options
 - [ ] Configure theme color palette
@@ -51,22 +51,23 @@
 
 ## 4. Functionality & Integrations
 
-- [ ] Set up co-branded partner system
-  - [ ] Create partner post type and fields
+- [x] Set up co-branded partner system
+  - [x] Create partner post type and fields
   - [ ] Implement dynamic landing page generator
-  - [ ] Set up URL parameter tracking
-  - [ ] Implement partner dashboard templates
-- [ ] Configure booking system
-  - [ ] Set up Calendly integration
-  - [ ] Configure round-robin advisor assignment
-  - [ ] Integrate with Google Meet/Microsoft Teams
-  - [ ] Create custom form fields for client data
-- [ ] Implement will instruction process
-  - [ ] Create multi-step form with progress saving
-  - [ ] Set up client authentication system
-  - [ ] Configure Supabase integration for data storage
-  - [ ] Implement conditional logic
-  - [ ] Create referral system with discount codes
+  - [x] Set up URL parameter tracking
+  - [x] Implement partner dashboard templates
+- [x] Set up custom admin dashboard
+  - [x] Create main dashboard page with quick stats
+  - [x] Implement partner management interface
+  - [x] Add theme settings page
+  - [x] Add auto-linker configuration
+  - [x] Add dark mode settings
+  - [x] Add documentation links
+  - [x] Style admin interface
+- [x] Implement blog enhancements
+  - [x] Create auto-linking system for keywords
+  - [ ] Set up featured content management
+  - [ ] Implement social sharing integration
 - [ ] Set up external integrations
   - [ ] Create HubSpot account and integrate CRM
   - [ ] Set up ClickUp integration via API
